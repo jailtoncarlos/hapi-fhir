@@ -1,0 +1,31 @@
+{
+	"resourceType": "StructureDefinition",
+	"url": "https://rdsuwearme.org/fhir/r4/StructureDefinition/PersonPatient",
+	"name": "MyCustomPatient",
+	"version": "1.0.1",
+	"title": "Custom Patient",
+	"status": "draft",
+	"description": "The Patient resources contain demographics and other administrative information about the individual who is the subject of the referral.",
+	"fhirVersion": "4.0.1",
+	"kind": "resource",
+	"abstract": false,
+	"type": "Patient",
+	"baseDefinition": "http://hl7.org/fhir/StructureDefinition/Patient",
+	"derivation": "constraint",
+	"differential": {
+		"element": [
+            {
+                "id": "Patient.meta.profile",
+                "path": "Patient.meta.profile",
+                "comment": "#### **_` FOR eREFERRAL USAGE: The meta.profile = https://rdsuwearme.org/fhir/r4/StructureDefinition/PersonPatient|1.0.0 `_**\n\nIt is up to the server and/or other infrastructure of policy to determine whether/how these claims are verified and/or updated over time.  The list of profile URLs is a set.",
+                "min": 1,
+                "mustSupport": true
+            },
+			{
+				"id": "Patient.gender",
+				"path": "Patient.gender",
+				"min": 1
+			}
+		]
+	}
+}

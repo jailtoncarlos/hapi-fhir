@@ -1,0 +1,26 @@
+{
+    "resourceType": "Patient",
+    "meta": {
+        "profile": [
+            "https://rdsuwearme.org/fhir/r4/StructureDefinition/PersonPatient"
+        ]
+    },
+    "name": [ {
+        "given": ["Lucas Calabrez"],
+        "family": "Pereyra"
+    }],
+    "address": [{
+        "line": ["3300 Washtenaw"],
+        "district": "Washtenaw",
+        "city": "Ann Harbour",
+        "state": "MI",
+        "country": "USA",
+        "postalCode": "48104"
+    }],
+    "birthDate": "1996-04-21",
+    "telecom": [{
+        "value": "(04) 5555-6789",
+        "use": "home"
+    }]
+
+}

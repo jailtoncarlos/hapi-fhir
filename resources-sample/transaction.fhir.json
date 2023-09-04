@@ -1,0 +1,505 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "fullUrl": "urn:uuid:0001abc",
+            "resource": {
+                "resourceType": "Patient",
+                "name": [
+                    {
+                        "family": "Pereyra",
+                        "given": ["Lucas"]
+                    }
+                ],
+                "telecom": [
+                    {
+                        "value": "(03)55556789",
+                        "use": "home"
+                    }
+                ],
+                "gender": "male",
+                "birthDate": "1997-07-16",
+                "address": [
+                    {
+                        "line": [
+                            "3300 Washtenaw"
+                        ],
+                        "city": "Ann Harbour",
+                        "district": "Washtenaw",
+                        "state": "MI",
+                        "postalCode": "48104",
+                        "country": "EUA"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Patient?name=Lucas"
+            }
+        },
+        {
+            "fullUrl": "urn:uuid:0002abc",
+            "resource": {
+                "resourceType": "Device",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/dev",
+                        "value": "10912105"
+                    }
+                ],
+                "expirationDate": "2020-10-10",
+                "lotNumber": "22222",
+                "modelNumber": "u888000-1",
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "33894803",
+                                "display": "Experimental Device"
+                            }
+                        ]
+                    }
+                ],
+                "patient": "urn:uuid:0001abc"
+            },
+            "request": {
+                "method": "POST",
+                "url": "Device?fullUrl=urn:uuid:0002abc"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T13:28:17-8480-6"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "8480-6",
+                            "display": "PA Sistólica"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:28:17+03:00",
+                "valueQuantity": {
+                        "value": 11.0,
+                        "unit": "mmHg"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T13:43:17-8480-6"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "8480-6",
+                            "display": "PA Sistólica"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:43:17+03:00",
+                "valueQuantity": {
+                        "value": 10.2,
+                        "unit": "mmHg"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T58:28:17-8480-6"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "8480-6",
+                            "display": "PA Sistólica"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:58:17+03:00",
+                "valueQuantity": {
+                        "value": 10.7,
+                        "unit": "mmHg"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T13:28:17-8462-4"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "8462-4",
+                            "display": "PA Diastólica"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:28:17+03:00",
+                "valueQuantity": {
+                        "value": 7.5,
+                        "unit": "mmHg"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T13:43:17-8462-4"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "8462-4",
+                            "display": "PA Diastólica"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:43:17+03:00",
+                "valueQuantity": {
+                        "value": 7.8,
+                        "unit": "mmHg"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T13:58:17-8462-4"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "8462-4",
+                            "display": "PA Diastólica"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:58:17+03:00",
+                "valueQuantity": {
+                        "value": 7.7,
+                        "unit": "mmHg"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T13:28:17-8867-4"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "8867-4",
+                            "display": "Frequência Cardíaca"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:28:17+03:00",
+                "valueQuantity": {
+                        "value": 76,
+                        "unit": "/min"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T13:43:17-8867-4"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "8867-4",
+                            "display": "Frequência Cardíaca"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:43:17+03:00",
+                "valueQuantity": {
+                        "value": 78,
+                        "unit": "/min"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T13:58:17-8867-4"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "8867-4",
+                            "display": "Frequência Cardíaca"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:58:17+03:00",
+                "valueQuantity": {
+                        "value": 77,
+                        "unit": "/min"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T13:28:17-9279-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "9279-1",
+                            "display": "Frequência Respiratória"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:28:17+03:00",
+                "valueQuantity": {
+                        "value": 13,
+                        "unit": "/min"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T13:43:17-9279-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "9279-1",
+                            "display": "Frequência Respiratória"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:43:17+03:00",
+                "valueQuantity": {
+                    "value": 14,
+                    "unit": "/min"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "identifier": [
+                    {
+                        "system": "www.uwearme.com/measures",
+                        "value": "0001abc-2023-07-07T13:58:17-9279-1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "9279-1",
+                            "display": "Frequência Respiratória"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "urn:uuid:0001abc"
+                },
+                "effectiveDateTime": "2023-07-07T13:58:17+03:00",
+                "valueQuantity": {
+                    "value": 14,
+                    "unit": "/min"
+                },
+                "device": {
+                    "reference": "urn:uuid:0002abc"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation?status=final"
+            }
+        }
+    ]
+}

@@ -1,0 +1,53 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://db:5432/hapi'
+    username: admin
+    password: admin
+    driverClassName: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
+      hibernate.search.enabled: false
+
+
+hapi:
+  fhir:
+    enable_repository_validating_interceptor: true
+    implementationguides:
+#https://simplifier.net/packages/hl7.fhir.us.qicore/5.0.0
+#https://groups.google.com/g/hapi-fhir/c/nHfkVqQBpYU
+#      qi-core:
+#        name: hl7.fhir.us.qicore
+#        version: 4.0.0
+# https://simplifier.net/rdsuwearme
+      rdsuwearme:
+#        url: https://simplifier.net/packages/hl7.fhir.rdsuwearme/1.0.1
+        name: hl7.fhir.rdsuwearme
+        version: 1.0.1
+        reloadExisting : false
+        supported_resource_types:
+          - StructureDefinition
+          - ValueSet
+          - CodingSystem
+          - Patient
+
+    tester:
+      home:
+        name: Local Tester
+        server_address: 'http://localhost:8080/fhir'
+        refuse_to_fetch_third_party_urls: false
+        fhir_version: R4
+        validation:
+          requests_enabled: true
+          responses_enabled: true
+  https://groups:
+    google:
+      com/g/hapi-fhir/c/nHfkVqQBpYU:
+#      global:
+#        name: Global Tester
+#        server_address: "http://hapi.fhir.org/baseR4"
+#        refuse_to_fetch_third_party_urls: false
+#        fhir_version: R4
+##        validation:
+##          requests_enabled: true
+##          responses_enabled: true

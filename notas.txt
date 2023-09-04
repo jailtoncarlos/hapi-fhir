@@ -1,0 +1,183 @@
+SIIM hackathon-dataset
+https://github.com/ImagingInformatics/hackathon-dataset
+
+---------------------------------------------------------------
+# HAPI FHIR
+- https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+  - Customizing The Web Testpage UI
+- https://github-wiki-see.page/m/hapifhir/hapi-fhir-jpaserver-starter/wiki/Configuration
+- https://aist.fh-hagenberg.at/wp-content/uploads/2019/06/FHSTP_FHIR_UNCODED.pdf
+- https://www.youtube.com/watch?v=bZraNRnRGVc
+- https://simplifier.net/organization/firely/news/55
+- https://simplifier.net/organization/firely/news/56
+- FHIR Business Case - https://infoscribe.infoway-inforoute.ca/display/HL7/FHIR+Business+Case
+- https://github.com/awslabs/fhir-works-on-aws-deployment/blob/mainline/USING_IMPLEMENTATION_GUIDES.md
+- Ward Weistra - Let's Build - IG and packages with Simplifier.net | DevDays November 2020 Virtual (https://www.youtube.com/watch?v=ItpBlnldMPo)
+- https://github.com/hapifhir/hapi-fhir-jpaserver-starter/issues/409
+- https://groups.google.com/g/hapi-fhir/c/nHfkVqQBpYU
+    Hm.. I can see the package being indexed during startup.
+    2021-12-16 13:26:17.450 [main] INFO  c.u.f.jpa.packages.JpaPackageCache
+    [JpaPackageCache.java:319] Package[hl7.fhir.us.qicore#4.9.0]
+    Indexing StructureDefinition Resource[package/StructureDefinition-qicore-patient.json] with URL: http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient|4.0.0
+- http://community.fhir.org/t/can-not-fetch-hapi-fhir-server-on-https-simplifier-net/1901/4
+- http://community.fhir.org/t/can-not-fetch-hapi-fhir-server-on-https-simplifier-net/1901
+
+##
+docker-compose up -d --build
+
+http://localhost:8080/fhir/metadata
+http://localhost:8080/fhir/swagger-ui/
+
+## Atividade 7 do Curso de Fundamentos de HL7® FHIR® V Turma
+-- https://drive.google.com/file/d/1jlrMNUXlS7cviMWOJ8eFwvdPHNi_D1o5/view?usp=sharing
+-- https://simplifier.net/rdsuwearme
+
+
+
+* resourceType": "CapabilityStatement",
+Tudo que o servidor aceita
+Configuração do servidor
+
+curl http://localhost:8080/fhir/metadata
+
+
+
+### upload dos dados em arquivos json
+curl -vX POST http://localhost:8080/fhir -d @./transaction.fhir.json  --header "Content-Type: application/json"
+curl http://localhost:8080/fhir/Patient
+curl http://localhost:8080/fhir/Observation/_search?patient.name=Lucas
+
+### Upload dos dados de todos os arquivos json em uma pasta
+for f in *.json; do curl -X POST -H "Content-Type: application/json" -d @$f http://localhost:8080/fhir/ ; done
+
+* Ativar a validação no servidor HAPI FHIR
+Um fato importante sobre os perfis está na obrigatoriedade de publicá-los com
+uma URL canônica, que identifica o profile como único dentro de um sistema. Essa
+URL é utilizada no processo de validação dos Recursos que são conformantes com o
+perfil específico.
+./src/main/resources/application.yaml
+descomentar as linhas abaixo
+        validation:
+          requests_enabled: true
+          responses_enabled: true
+
+./src/main/java/ca/uhn/fhir/jpa/starter/AppProperties.java
+Alterar as variáveis abaixo de false para true
+  public static class Validation {
+    private Boolean requests_enabled = true;
+    private Boolean responses_enabled = true;
+
+# Recursos de conformidade FHIR
+
+## Structure Definition: Patient Profile (StructureDefinition.json)
+Canonical URL
+    - Qualquer recurso de conformidade precisa de uma URL canônica
+    - URLs canônicos tratam da identidade dos artefatos, não necessariamente do local de recuperação
+
+Canonical reference
+ -  Usada em instâncias FHIR (Resource.meta.profile),
+    que é usada para se referir a outras StructureDefinitions
+    (ou qualquer outro recurso de conformidade)
+
+
+
+
+- Subir a definição no servidor
+curl -vX POST http://localhost:8080/fhir/StructureDefinition -d @Paciente.StructureDefinition.json   --header "Content-Type: application/json"
+curl -vX POST http://localhost:8080/fhir/Patient -d @./patient.fhir.json  --header "Content-Type: application/json"
+curl -vX POST http://localhost:8080/fhir/Patient/$validate?mode=update -d @patient.fhir.json  --header "Content-Type: application/json"
+curl -vX POST http://localhost:8080/fhir/Patient/$validate?profile=https://rdsuwearme.org/fhir/r4/StructureDefinition/PersonPatient -d @./patient.fhir.json  --header "Content-Type: application/json"
+
+
+
+curl -vX POST  http://localhost:8080/fhir/Patient/$validate?profile=https://rdsuwearme.org/fhir/r4/StructureDefinition/PersonPatient -d @./patient.fhir.json  --header "Content-Type: application/json"
+
+curl -vX POST http://localhost:8080/fhir/Patient/$validate?mode=update -d @patient.fhir.json  --header "Content-Type: application/json"
+
+
+
+
+---------------------------------------------------------------
+https://repositorio.ufsc.br/handle/123456789/231209
+
+2.5.1.7.2 Guias de Implementação
+Um Guia de Implementação, ou mais conhecido como Implementation Guide
+(IG), é um documento que detalha os casos de uso e requisitos que devem ser suportados por sistemas quando esses adotam certos padrões (OEMIG; SNELICK, 2016).
+Na documentação do FHIR, um IG é um conjunto de regras de como um problema de
+interoperabilidade específico é resolvido, geralmente pelo uso de Resources (HEALTH
+LEVEL SEVEN INTERNATIONAL, 2021a).
+A documentação disponibiliza um Recurso específico para esse contexto, o
+ImplementationGuide, que é responsável por reunir todas as partes de um IG e publicálo como um documento computável e lógico
+- https://hl7.org/fhir/uv/ips/
+
+...
+Além dessas funcionalidades, os IGs ainda oferecem os pacotes com as StructureDefinitions, ValueSets, ConceptMaps, CodeSystems e demais recursos. Com a
+devida implementação, os pacotes podem ser integrados e utilizados para validação
+de Resources que são enviados para servidores (PATIENT CARE WORK GROUP,
+2020).
+
+
+3.1.7 Validação do Servidor
+Para a validação técnica do servidor, foi utilizada a ferramenta open source
+**Crucible**, resposnsável por realizar testes de conformidade com o padrão FHIR e
+pontuar as principais funcionalidades das implementações em relação aos Resources
+e operações HTTP. A ferramenta é bastante utilizada pela comunidade, seja para
+avaliação de aplicações e correção de performances (MITRE CORPORATION, 2021a).
+- https://github.com/fhir-crucible/crucible
+
+3.3.4 Implementation Guide
+Para desenvolvimento do IG, foi utilizado a plataforma SIMPLIFIER.NET, capaz
+de registrar e utilizar os profiles, as extensions e os demais Recursos de conformidade. Essa plataforma oferece ferramentas de edição e uma estrutura funcional para
+organizar as páginas de um IG, os pacotes de validação e toda a estrutura lógica
+necessária para os Resources, além de possuir um Controle de Qualidade dessas
+estruturas (FIRELY, 2021b).
+Com o IG desenvolvido e publicado, é possível gerar um repositório com a versão mais recente da implementação e incorporar esse pacote no servidor desenvolvido,
+por meio da adição de um interceptador nas linhas de código. Esse interceptador utiliza
+o link do pacote para baixar toda a estrutura dos Profiles para o banco de dados e
+utilizá-los na validação de Recursos que se denominam pertencentes à esses perfis. O
+servidor é capaz de realizar essa interceptação por meio da URL canônica adicionada
+no elemento profile do Recurso.
+
+4.1.6 Pacote de Resources
+Como parte da criação do Implementation Guide da proposta e da validação
+dos Recursos pelo servidor, os profiles desenvolvidos foram publicados na plataforma
+do SIMPLIFIER.NET, onde não foi encontrado nenhum problema pelo Controle de
+Qualidade do sistema. A Figura 47 exibe a página dos Resources do projeto IEB-UFSC on FHIR, onde é possível também observar o armazenamento dos profiles e
+Recursos de terminologia utilizados. Vale ressaltar que estão presentes apenas os
+Recursos definidos como importantes no armazenamento e na reutilização dos dados
+de pesquisas clínicas, omitindo os Recursos e elementos desnecessários.
+Com esse pacote implementado, foi possível adicioná-lo ao servidor por meio
+da adição de um interceptador. Esse, por fim, utilizou a URL oficial do pacote, fornecido
+pelo SIMPLIFIER.NET, para armazenar as últimas versões dos Recursos do projeto e tilizá-los como uma estrutura lógica de validação da implementação. Com isso, todo
+Recurso de entrada que se declarou parte de algum perfil do pacote passou por uma
+validação local baseada nesse interceptador.
+
+
+---------------------------------------------------------------
+Desenvolvimento de uma Plataforma Web Multiusuário Utilizando Protocolo HL7
+FHIR para Visualização, Análise e Acompanhamento de Dados de Indivíduos com
+Diabetes Mellitus
+https://repositorio.ufsc.br/bitstream/handle/123456789/247392/PEEL2107-D.pdf?sequence=1&isAllowed=y
+
+HUSSAIN; LANGER; KOHLI, 2018
+
+A implantação e validação do servidor HAPI FHIR foi realizada no trabalho de Vieira
+(2021) onde foram apresentados os conceitos, utilização e funcionamento desse servidor
+
+O deploy do servidor FHIR foi executado utilizando a tecnologia container através da
+aplicação HAPI FHIR, validada por Oliveira (2021)
+
+A imagem do servidor que foi utilizado como modelo pode ser encontrada no repositório
+oficial do HAPI FHIR (HAPI FHIR, 2022b).
+
+
+9.2 INCLUSÃO DE DADOS AOS SERVIDORES
+...
+Os acessos a esses dados devem realizado através de uma requisição de leitura,
+utilizando o parâmetro GET. Os servidores tem propósitos diferentes na aplicação da interface,
+de forma que, o servidor HAPI FHIR é utilizado para visualização dos dados de pacientes de
+forma individualizada, isso é, um valor de identificação deve ser utilizado na requisição HTTP.
+O Servidor ElasticSearch serve para um propósito de visualização dos dados em conjunto, o
+53
+que significa que nenhum identificador é necessário, e a resposta da requisição deve ser um
+conjunto de dados relacionado à pesquisa desejada.
